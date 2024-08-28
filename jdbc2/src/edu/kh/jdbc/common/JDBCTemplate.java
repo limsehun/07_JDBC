@@ -141,8 +141,7 @@ public class JDBCTemplate {
 	 * + PreparedStatement도 close 처리 가능!!
 	 *   왜?? PreparedStatement가 Statement의 자식이기 때문에!!
 	 *   (다형성 업캐스팅)
-	 * @param stmt
-	 */
+	 * @param stmt	 */
 	
 	public static void close(Statement stmt) {
 		try {
