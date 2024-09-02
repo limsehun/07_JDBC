@@ -50,8 +50,8 @@ public class UserView {
 				System.out.println("6. ID, PW가 일치하는 회원이 있을 경우 이름 수정(UPDATE)");
 				System.out.println("7. User 등록(아이디 중복 검사)");
 				System.out.println("8. 여러 User 등록하기");
+				System.out.println("9. ID, USER_NO가 일치하는 회원이 있을 경우 비밀번호 수정(UPDATE)");
 				System.out.println("0. 프로그램 종료");
-				
 				System.out.print("메뉴선택 : ");
 				input=sc.nextInt();
 				sc.nextLine(); // 버퍼에 남은 개행문자 제거
@@ -65,6 +65,7 @@ public class UserView {
 				case 6 : updateName(); break;
 				case 7 : insertUser2(); break;
 				case 8 : multiInsertUser(); break;
+				case 9 : updatePassword(); break;
 				case 0 : System.out.println("\n[프로그램 종료]\n"); break;
 				default: System.out.println("\n[메뉴 번호만 입력하세요}\n");
 				}
@@ -89,7 +90,7 @@ public class UserView {
 	 * 1. User 등록
 	 * @throws Exception 
 	 */
-	private void insertUser() throws Exception {
+	private void insertUser() throws Exception { 
 		System.out.println("\n=== 1. User 등록 ===\n");
 		
 		System.out.print("ID : ");
@@ -380,8 +381,39 @@ public class UserView {
 		} else {
 			System.out.println("삽입 실패");
 		}
+	}
+	
+	//--------------------------------------------------------------------
+	private void updatePassword() throws Exception {
+		System.out.println("\n=== 6. ID, NAME이 일치하는 회원이 있을 경우 이름 수정(UPDATE) ===\n");
 		
+		System.out.println("ID : ");
+		String userId = sc.nextLine();
 		
+		System.out.println("NAME : ");
+		String userNm = sc.nextLine();
+		
+		/* 입력 받은 ID, PW가 일치하는 회원이 있는지 조회(SELECT) */
+		// -> USER_NO 조회
+		int userNo = service.selectUserNo(userId, userNm);
+		
+		if(userNo == 0) { // 조회 결과 없음
+			System.out.println(
+					"아이디, 비밀번호가 일치하는 사용자가 없습니다");
+			return;
+		}
+		
+		// 조회된 사용자 번호가 있을 경우
+		System.out.print("수정할 이름 입력 : ");
+		String userPw = sc.nextLine();
+		
+		// 비번 수정 서비스 호출 후 결과 반환 받기
+		// 결과(수정된 행의 개수, int) 반환 받기
+		int result = service.updatePassword(userPassword, userNo);
+		
+		if (result>0) {
+			System.out.println("수정 성공");
+		}else System.out.println("수정 실패");
 		
 	}
 	

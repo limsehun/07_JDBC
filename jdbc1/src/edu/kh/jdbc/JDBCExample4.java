@@ -50,7 +50,7 @@ public class JDBCExample4 {
 					" ' ORDER BY JOB_CODE ASC";
 */			
 			String sql = """
-					SELECT 
+				SELECT 
 					EMP_ID, 
 					EMP_NAME, 
 					NVL(DEPT_TITLE, '없음') DEPT_TITLE, 

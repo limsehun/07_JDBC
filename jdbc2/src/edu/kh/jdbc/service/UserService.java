@@ -150,7 +150,7 @@ public class UserService {
 		// 1. Connection 생성하기
 		Connection conn = getConnection();
 		
-		// 2. 데이터 가공 (없으면 패스0
+		// 2. 데이터 가공 (없으면 패스)
 		
 		// 3. DAO 메서드(DELETE) 호출 후 
 		//   결과(삭제된 행의 개수, int) 반환 받기
@@ -253,7 +253,7 @@ public class UserService {
 		
 		return count;
 	}
-	
+
 	
 	
 	
